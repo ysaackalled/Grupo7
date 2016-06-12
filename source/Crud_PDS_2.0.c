@@ -18,6 +18,131 @@ typedef struct
 
 Acessorio acessorio;
 
+
+
+//Função Cadastrar:
+
+void Cadastro (void)
+{
+	FILE *Cad;
+	int i;
+
+	//ID
+	printf("Digite o ID do produto: ");
+	scanf("%s", acessorio.id);
+	for (i = 0; i < strlen(acessorio.id); i++)
+	acessorio.id[i] = toupper(acessorio.id[i]);
+	
+
+
+	//NOME
+	printf("Digite o Nome do produto: ");
+	scanf("%s", acessorio.nome);
+	for (i = 0; i < strlen(acessorio.nome); i++)
+	acessorio.nome[i] = toupper(acessorio.nome[i]);
+	
+
+
+	//TIPO
+	printf("Digite o tipo do produto: ");
+	scanf("%s", acessorio.tipo);
+	for (i = 0; i < strlen(acessorio.tipo); i++)
+	acessorio.tipo[i] = toupper(acessorio.tipo[i]);
+	tipoValida();
+	
+	
+
+	//MODELO
+	printf("Digite o modelo do produto: ");
+	scanf("%s", acessorio.modelo);
+	for (i = 0; i < strlen(acessorio.tipo); i++)
+	acessorio.modelo[i] = toupper(acessorio.modelo[i]);
+	modeloValida()
+	
+	//COR
+	printf("Digite a cor do produto: ");
+	scanf("%s", acessorio.cor);
+	for (i = 0; i < strlen(acessorio.tipo); i++)
+	acessorio.cor[i] = toupper(acessorio.cor[i]);
+	corValida();
+	
+	
+	//PREÇO
+	printf("Digite o preço do produto: ");
+	scanf("%f", &acessorio.preco);
+	
+	
+	//QUANTIDADE
+	printf("Digite a quantidade de itens do produto: ");
+	scanf("%s", acessorio.qnt);
+	
+	Cad = fopen("Cadastro.txt","append")
+	
+	if (Cad == NULL)
+		printf("Erro\n");
+	else {
+		fwrite(&acessorio, sizeof(acessorio), 1, Cad);
+
+		if (ferror(Cad))
+			printf("Erro no Cadastro\n");
+		else
+			printf("\n Cadastrado com sucesso! \n\n");
+	}
+
+	fclose(Cad);
+}
+
+
+
+//Função Validar
+
+void tipoValida(){
+	int i;
+	while ((strcmp(acessorio.tipo, "ACESSORIO") != 0) {
+		printf("Tipo Invalido\n\n");
+		printf("Digite o tipo do produto: ");
+		scanf("%s", acessorio.tipo);	
+		for(i = 0 ; i < strlen(acessorio.tipo) ; i++) {
+			acessorio.tipo[i] = toupper(acessorio.tipo[i]);
+		}
+	}
+}
+
+void corValida(){
+	int i;
+	while ((strcmp(acessorio.cor, "PRETO") != 0) && (strcmp(acessorio.cor, "BRANCO") != 0) && (strcmp(acessorio.cor, "VERMELHO") != 0) && (strcmp(acessorio.cor, "AZUL") != 0) && (strcmp(acessorio.cor, "VERDE") != 0) && (strcmp(acessorio.cor, "AMARELO") != 0){
+		printf("Cor Invalida\n\n");
+		printf("Digite a cor do produto: ");
+		scanf("%s", acessorio.cor);	
+		for(i = 0 ; i < strlen(acessorio.cor) ; i++) {
+			acessorio.cor[i] = toupper(acessorio.cor[i]);
+		}
+	}
+}
+
+
+
+void modeloValida(){
+	int i;
+	while ((strcmp(acessorio.modelo, "P") != 0) && (strcmp(acessorio.modelo, "L") != 0) && (strcmp(acessorio.modelo, "M") != 0) && (strcmp(acessorio.modelo, "XL") != 0) {
+		printf("Modelo Invalido\n\n");
+		printf("Digite o modelo do produto: (P,M,L,XL)");
+		scanf("%s", acessorio.modelo);	
+		for(i = 0 ; i < strlen(acessorio.modelo) ; i++) {
+			acessorio.modelo[i] = toupper(acessorio.modelo[i]);
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
 int menu(void)
 {
 	int opcao;
@@ -42,6 +167,7 @@ int menu(void)
 	else if (opcao == 1)
 	{
 		printf("\nVocê está Cadastrando Acessorios\n");
+		Cadastro();
 
 	}
 
@@ -89,103 +215,6 @@ int menu(void)
 
 
 
-//Função Validar
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Função Cadastrar:
-
-void Cadastro (void)
-{
-	FILE *Cad;
-	int i;
-
-	//ID
-	printf("Digite o ID do produto: ");
-	scanf("%s", acessorio.id);
-	for (i = 0; i < strlen(acessorio.id); i++)
-	{
-		acessorio.id[i] = toupper(acessorio.id[i]);
-	}
-
-
-	//NOME
-	printf("Digite o Nome do produto: ");
-	scanf("%s", acessorio.nome);
-	for (i = 0; i < strlen(acessorio.nome); i++)
-	{
-		acessorio.nome[i] = toupper(acessorio.nome[i]);
-	}
-
-
-	//TIPO
-	printf("Digite o tipo do produto: ");
-	scanf("%s", acessorio.tipo);
-	for (i = 0; i < strlen(acessorio.tipo); i++)
-	{
-		acessorio.tipo[i] = toupper(acessorio.tipo[i]);
-	}
-	
-
-	//MODELO
-	printf("Digite o modelo do produto: ");
-	scanf("%s", acessorio.modelo);
-	for (i = 0; i < strlen(acessorio.tipo); i++)
-	{
-		acessorio.modelo[i] = toupper(acessorio.modelo[i]);
-	}
-	
-	//COR
-	printf("Digite a cor do produto: ");
-	scanf("%s", acessorio.cor);
-	for (i = 0; i < strlen(acessorio.tipo); i++)
-	{
-		acessorio.cor[i] = toupper(acessorio.cor[i]);
-	}
-	
-	
-	//PREÇO
-	printf("Digite o preço do produto: ");
-	scanf("%f", &acessorio.preco);
-	
-	
-	//QUANTIDADE
-	printf("Digite a quantidade de itens do produto: ");
-	scanf("%s", acessorio.qnt);
-	
-	Cad = fopen("Cadastro.txt","append")
-	
-	if (Cad == NULL)
-		printf("Erro\n");
-	else {
-		fwrite(&acessorio, sizeof(acessorio), 1, Cad);
-
-		if (ferror(Cad))
-			printf("Erro no Cadastro\n");
-		else
-			printf("\n Cadastrado com sucesso! \n\n");
-	}
-
-	fclose(Cad);
-}
-
-
-
-
-
-
-
 
 
 
@@ -199,4 +228,5 @@ int main ()
 	system ("pause");
 	return 0;
 }
+
 
